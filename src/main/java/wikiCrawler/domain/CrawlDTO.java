@@ -1,8 +1,5 @@
 package wikiCrawler.domain;
 
-/**
- * Created by ab on 9/11/16.
- */
 public class CrawlDTO {
     private String message;
 
