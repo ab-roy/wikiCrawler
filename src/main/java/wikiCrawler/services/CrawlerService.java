@@ -64,11 +64,6 @@ public class CrawlerService {
         }
     }
 
-    private void printTitle(String article) {
-        // formats titles for printing to the console
-        System.out.println("         ▼\n      " + article.substring(30).replace("_", " "));
-    }
-
     private String grabNextLink(String article) throws IOException {
         String nextAnchore = "";
 
