@@ -92,7 +92,7 @@ $gradle clean test
 
 ## Authors
 
-* **Abhishek Roy** - *Initial work* - [PurpleBooth](https://github.com/ab-roy)
+* **Abhishek Roy** - *Initial work* - [AB_ROY](https://github.com/ab-roy)
 
 ## Resources
 
