@@ -5,15 +5,22 @@
     <script src="crawler.js"></script>
 </head>
 <body>
+<h1>Wikipedia Philosophy WebCrawler</h1>
 
 <div style="padding:16px;">
-    <input type="text" id="link_text" size="100" value="https://en.wikipedia.org/wiki/Paraguay"/>
+    <input type="text" id="link_text"
+           size="100"
+           style="border: solid 5px #c9c9c9;"
+           value="https://en.wikipedia.org/wiki/Paraguay"/>
     <br />
     <button id="Get">Crawl Wikipedia to Philosophy</button>
     <button id="Reset">Reset</button>
+    <button id="ResetToExample">Reset to Example</button>
 </div>
 
-</div><b>Crawl Result : <label id="msg"></label></b>
+<b>Crawl Result : <label id="msg"></label></b>
+<div id = "links">
+</div>
 
 </body>
 </html>

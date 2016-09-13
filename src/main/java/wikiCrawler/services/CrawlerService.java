@@ -13,6 +13,8 @@ import wikiCrawler.exceptions.domain.InvalidInputException;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Component
@@ -28,7 +30,8 @@ public class CrawlerService {
 
         if(isValidUrl(input) && isValidUrl(target)){
             try {
-                result= new CrawlDTO(findTargetWiki(input, target, 0));
+                List<String> hops = new ArrayList<>();
+                result= new CrawlDTO(findTargetWiki(input, target, 0, hops), hops);
             } catch (IOException e) {
                 logger.error(e.toString());
                 e.printStackTrace();
@@ -40,8 +43,9 @@ public class CrawlerService {
         return result;
     }
 
-    private String findTargetWiki(String article, String target, Integer linkCounter) throws IOException {
+    private String findTargetWiki(String article, String target, Integer linkCounter, List<String> hops) throws IOException {
 
+        hops.add(article);
         // base-case: resets counter and breaks loop when target is reached
         if (article.equalsIgnoreCase(target)) {
             int total = linkCounter;
@@ -50,13 +54,13 @@ public class CrawlerService {
            //max number of links to crawl through
         } else if (linkCounter > MAX_CRAWLS) {
             logger.info("Too far away...giving up after "+MAX_CRAWLS+" crawls");
+            hops = new ArrayList<>();
             return "Too far away...giving up";
 
         } else {
             String nextLink = grabNextLink(article);
-            printTitle(nextLink);
             linkCounter++;
-            return findTargetWiki(nextLink, target, linkCounter);
+            return findTargetWiki(nextLink, target, linkCounter, hops);
         }
     }
 
@@ -115,7 +119,6 @@ public class CrawlerService {
     private boolean isAWikiLink(String link) {
         return (link.contains("wiki") && !link.contains("wiktionary"));
     }
-
 
     private boolean isValidUrl(String input) {
         return input.startsWith(WIKIPEDIA_BASE_URL);
